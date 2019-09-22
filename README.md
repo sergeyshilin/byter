@@ -34,13 +34,13 @@ will read 4 consequent bytes from the binary source `data`.
 However, to read an array of chars (string) the method is
 
 ```python
-s = read_string(data, len)
+s = read_string(data, s_len)
 ```
 
 It is also possible to read an array of bytes using the following method:
 
 ```python
-arr = read_array(data, len, read_unsigned_int)
+arr = read_array(data, size, read_unsigned_int)
 ```
 
-This will read a sequence of length `len` of unsigned ints, `len  * 4` bytes in total.
+This will read a sequence of length `size` of unsigned ints, `size  * 4` bytes in total.
