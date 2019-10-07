@@ -1,6 +1,35 @@
 # Byter
 Python reader/writer for binary objects
 
+## Usage Example
+
+```python
+with open(fpath, "rb") as data:
+    has_data = read_bool(data)
+    year = read_short(data)
+    month = read_short(data)
+    width = read_float(data)
+    height = read_float(data)
+    text = read_string(data, 70)
+    array = read_array(data, size, 'unsigned_short')
+
+print("has_data:", has_data)
+print("year:", year)
+print("month:", month)
+print("width:", width)
+print("height:", height)
+print("text": text)
+print("array:")
+
+>> has_data: True
+   year: 2019
+   month: 9
+   width: 1280.0
+   height: 1024.0
+   text: "Hello World!"
+   array: [13, 4, 16]
+```
+
 ## Types allowed to read/write
 
 | C Type | Python type | Size in bytes |
@@ -40,7 +69,7 @@ s = read_string(data, s_len)
 It is also possible to read an array of bytes using the following method:
 
 ```python
-arr = read_array(data, size, read_unsigned_int)
+arr = read_array(data, size, 'unsigned_short')
 ```
 
 This will read a sequence of length `size` of unsigned ints, `size  * 4` bytes in total.
