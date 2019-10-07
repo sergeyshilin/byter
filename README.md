@@ -78,4 +78,4 @@ It is also possible to read an array of bytes using the following method:
 arr = read_array(data, size, 'unsigned_short')
 ```
 
-This will read a sequence of length `size` of unsigned ints, `size  * 4` bytes in total.
+This will read a sequence of length `size` of unsigned ints, `size  * 2` bytes in total (`short` type is of 2 bytes).
