@@ -1,6 +1,12 @@
 # Byter
 Python reader/writer for binary objects
 
+## Installation
+
+```
+pip install -U byter
+```
+
 ## Usage Example
 
 ```python
