@@ -24,8 +24,8 @@ print("year:", year)
 print("month:", month)
 print("width:", width)
 print("height:", height)
-print("text": text)
-print("array:")
+print("text:": text)
+print("array:", array)
 
 >> has_data: True
    year: 2019
