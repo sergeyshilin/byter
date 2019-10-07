@@ -10,14 +10,14 @@ pip install -U byter
 ## Usage Example
 
 ```python
-with open(fpath, "rb") as data:
+with open("/path/to/binary/file", "rb") as data:
     has_data = read_bool(data)
     year = read_short(data)
     month = read_short(data)
     width = read_float(data)
     height = read_float(data)
     text = read_string(data, 70)
-    array = read_array(data, size, 'unsigned_short')
+    array = read_array(data, 3, 'unsigned_short')
 
 print("has_data:", has_data)
 print("year:", year)
