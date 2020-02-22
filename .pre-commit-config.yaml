@@ -1,0 +1,17 @@
+- repo: local
+  hooks:
+    - id: yapf
+      name: yapf
+      entry: bash ./bin/yapf-pre-commit.sh
+      language: system
+      files: \.py$
+      require_serial: true
+
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v2.4.0
+  hooks:
+    - id: trailing-whitespace
+    - id: flake8
+      additional_dependencies:
+        - flake8-docstrings
+        - flake8-quotes
