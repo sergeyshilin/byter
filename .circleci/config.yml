@@ -57,7 +57,7 @@ jobs:
       - run:
           name: Test Byter package
           command: |
-            . venv/bin/activate
+            . venv-dev/bin/activate
             python -m pytest tests/
 
 workflows:
