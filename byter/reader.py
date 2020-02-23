@@ -35,10 +35,10 @@ def read_char(data):
 
     Returns
     -------
-    str
-        Python string of length of 1
+    bytes
+        Python string of length of 1, encoded as bytes
     """
-    s_type = get_type("char")
+    s_type = "=%s" % get_type("char")
     return struct.unpack(s_type, data.read(1))[0]
 
 
@@ -56,7 +56,7 @@ def read_signed_char(data):
     int
         Python integer
     """
-    s_type = get_type("signed_char")
+    s_type = "=%s" % get_type("signed_char")
     return struct.unpack(s_type, data.read(1))[0]
 
 
@@ -74,7 +74,7 @@ def read_unsigned_char(data):
     int
         Python integer
     """
-    s_type = get_type("unsigned_char")
+    s_type = "=%s" % get_type("unsigned_char")
     return struct.unpack(s_type, data.read(1))[0]
 
 
@@ -92,7 +92,7 @@ def read_bool(data):
     bool
         True or False
     """
-    s_type = get_type("bool")
+    s_type = "=%s" % get_type("bool")
     return struct.unpack(s_type, data.read(1))[0]
 
 
@@ -110,7 +110,7 @@ def read_short(data):
     int
         Python integer
     """
-    s_type = get_type("short")
+    s_type = "=%s" % get_type("short")
     return struct.unpack(s_type, data.read(2))[0]
 
 
@@ -128,7 +128,7 @@ def read_unsigned_short(data):
     int
         Python integer
     """
-    s_type = get_type("unsigned_short")
+    s_type = "=%s" % get_type("unsigned_short")
     return struct.unpack(s_type, data.read(2))[0]
 
 
@@ -146,7 +146,7 @@ def read_int(data):
     int
         Python integer
     """
-    s_type = get_type("int")
+    s_type = "=%s" % get_type("int")
     return struct.unpack(s_type, data.read(4))[0]
 
 
@@ -164,7 +164,7 @@ def read_unsigned_int(data):
     int
         Python integer
     """
-    s_type = get_type("unsigned_int")
+    s_type = "=%s" % get_type("unsigned_int")
     return struct.unpack(s_type, data.read(4))[0]
 
 
@@ -184,7 +184,7 @@ def read_long(data):
     int
         Python integer
     """
-    s_type = get_type("long")
+    s_type = "=%s" % get_type("long")
     return struct.unpack(s_type, data.read(4))[0]
 
 
@@ -204,7 +204,7 @@ def read_unsigned_long(data):
     int
         Python integer
     """
-    s_type = get_type("unsigned_long")
+    s_type = "=%s" % get_type("unsigned_long")
     return struct.unpack(s_type, data.read(4))[0]
 
 
@@ -222,7 +222,7 @@ def read_long_long(data):
     int
         Python integer
     """
-    s_type = get_type("long_long")
+    s_type = "=%s" % get_type("long_long")
     return struct.unpack(s_type, data.read(8))[0]
 
 
@@ -240,7 +240,7 @@ def read_unsigned_long_long(data):
     int
         Python integer
     """
-    s_type = get_type("unsigned_long_long")
+    s_type = "=%s" % get_type("unsigned_long_long")
     return struct.unpack(s_type, data.read(8))[0]
 
 
@@ -258,7 +258,7 @@ def read_float(data):
     float
         Python float
     """
-    s_type = get_type("float")
+    s_type = "=%s" % get_type("float")
     return struct.unpack(s_type, data.read(4))[0]
 
 
@@ -276,7 +276,7 @@ def read_double(data):
     float
         Python float
     """
-    s_type = get_type("double")
+    s_type = "=%s" % get_type("double")
     return struct.unpack(s_type, data.read(8))[0]
 
 
@@ -296,7 +296,7 @@ def read_string(data, s_len):
     str
         Python string of length `s_len`
     """
-    return struct.unpack("%ds" % s_len, data.read(s_len))[0].decode("utf-8")
+    return struct.unpack("=%ds" % s_len, data.read(s_len))[0].decode("utf-8")
 
 
 def read_array(data, size, c_type):
@@ -318,7 +318,7 @@ def read_array(data, size, c_type):
         Python list of size `size`
     """
     s_type = get_type(c_type)
-    format_string = str(size) + s_type  # e.g. 10i --> read 10 int's
+    format_string = "=%d%s" % (size, s_type)  # e.g. 10i --> read 10 int's
     num_bytes_to_read = struct.calcsize(format_string)
 
     return struct.unpack(format_string, data.read(num_bytes_to_read))
