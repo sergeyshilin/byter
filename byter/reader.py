@@ -323,4 +323,4 @@ def read_array(data, size, c_type):
     format_string = "=%d%s" % (size, s_type)  # e.g. 10i --> read 10 int's
     num_bytes_to_read = struct.calcsize(format_string)
 
-    return struct.unpack(format_string, data.read(num_bytes_to_read))
+    return list(struct.unpack(format_string, data.read(num_bytes_to_read)))
