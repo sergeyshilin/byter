@@ -1,3 +1,4 @@
+# yapf: disable
 TYPES_TABLE = {
     "char":               "c",
     "signed_char":        "b",
@@ -14,3 +15,4 @@ TYPES_TABLE = {
     "float":              "f",
     "double":             "d"
 }
+# yapf: enable
