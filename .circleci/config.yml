@@ -1,0 +1,73 @@
+# Python CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.7.3
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Install Ddev Dependencies
+          command: |
+            python3 -m venv venv-dev
+            . venv-dev/bin/activate
+            pip install -r requirements-dev.txt
+      - save_cache:
+          paths:
+            - ./venv-dev
+          key: v1-dev-deps-{{ checksum "requirements-dev.txt" }}
+
+  style_check:
+    docker:
+      - image: circleci/python:3.7.3
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dev-deps-{{ checksum "requirements-dev.txt" }}
+            - v1-dev-deps-
+      - run:
+          name: Code Style Check - Yapf
+          command: |
+            . venv-dev/bin/activate
+            git diff-tree --no-commit-id --name-only -r HEAD | \
+            grep --color=never '.py$' | xargs yapf --diff
+      - run:
+          name: Code Analyzer - Flake8
+          command: |
+            . venv-dev/bin/activate
+            git diff-tree --no-commit-id --name-only -r HEAD | \
+            grep --color=never '.py$' | xargs flake8
+
+  test:
+    docker:
+      - image: circleci/python:3.7.3
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dev-deps-{{ checksum "requirements-dev.txt" }}
+            - v1-dev-deps-
+      - run:
+          name: Test Byter package
+          command: |
+            . venv/bin/activate
+            python -m pytest tests/
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - style_check:
+          requires:
+            - build
+      - test:
+          requires:
+            - build
