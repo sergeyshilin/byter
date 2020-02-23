@@ -1,5 +1,6 @@
 """Byter read functions."""
 
+# yapf: disable
 __all__ = [
     "read_char",
     "read_signed_char",
@@ -18,6 +19,7 @@ __all__ = [
     "read_string",
     "read_array"
 ]
+# yapf: enable
 
 import struct
 

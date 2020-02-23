@@ -1,5 +1,6 @@
 """Byter write functions."""
 
+# yapf: disable
 __all__ = [
     "write_char",
     "write_signed_char",
@@ -18,6 +19,7 @@ __all__ = [
     "write_string",
     "write_array"
 ]
+# yapf: enable
 
 import struct
 
