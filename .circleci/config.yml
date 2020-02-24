@@ -36,13 +36,13 @@ jobs:
           command: |
             . venv-dev/bin/activate
             git diff-tree --no-commit-id --name-only -r HEAD | \
-            grep --color=never '.py$' | xargs -0 -r yapf --diff
+            grep --color=never '.py$' | xargs -n1 yapf --diff
       - run:
           name: Code Analyzer - Flake8
           command: |
             . venv-dev/bin/activate
             git diff-tree --no-commit-id --name-only -r HEAD | \
-            grep --color=never '.py$' | xargs -0 -r flake8
+            grep --color=never '.py$' | xargs -n1 flake8
 
   test:
     docker:
